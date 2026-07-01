@@ -1,4 +1,4 @@
-import { db, type Category } from './database';
+import { db, type Category, type Wallet } from './database';
 
 export const DEFAULT_CATEGORIES: Category[] = [
   // Expenses (IDs 1-12)
@@ -24,11 +24,22 @@ export const DEFAULT_CATEGORIES: Category[] = [
   { id: 18, name: 'อื่นๆ', icon: 'MoreHorizontal', color: '#6B7A99', type: 'income', isDefault: 1 }
 ];
 
+export const DEFAULT_WALLETS: Wallet[] = [
+  { id: 1, name: 'เงินสด', type: 'cash', balance: 0, color: '#C9A55C' }, // gold
+  { id: 2, name: 'บัญชีหลัก', type: 'bank', balance: 0, color: '#5B8DEF' }, // blue
+  { id: 3, name: 'บัตรเครดิต', type: 'credit', balance: 0, color: '#E8465A' } // red
+];
+
 export async function seedDatabase() {
-  const count = await db.categories.count();
-  if (count === 0) {
+  const catCount = await db.categories.count();
+  if (catCount === 0) {
     console.log('Seeding initial categories atomically using bulkPut...');
-    // bulkPut is safe from duplicate keys even if run multiple times concurrently
     await db.categories.bulkPut(DEFAULT_CATEGORIES);
+  }
+
+  const walletCount = await db.wallets.count();
+  if (walletCount === 0) {
+    console.log('Seeding initial wallets atomically using bulkPut...');
+    await db.wallets.bulkPut(DEFAULT_WALLETS);
   }
 }

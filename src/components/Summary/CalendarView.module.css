@@ -1,0 +1,198 @@
+.container {
+  padding: 0 16px 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekdayRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.weekdayLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.emptyCell {
+  aspect-ratio: 1;
+}
+
+.dayCell {
+  aspect-ratio: 1;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--color-text-secondary);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.hasData {
+  background-color: var(--color-bg-elevated);
+  border-color: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.hasData:active {
+  transform: scale(0.92);
+  border-color: var(--color-accent-gold);
+}
+
+.dayNumber {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-display);
+}
+
+.dotsContainer {
+  display: flex;
+  gap: 3px;
+  height: 4px;
+}
+
+.incomeDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-income);
+}
+
+.expenseDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-expense);
+}
+
+/* Daily Drawer Sheet style */
+.drawerOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 150;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.drawer {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-bg-deep);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-top: 1px solid var(--color-border);
+  padding: 20px 20px 34px 20px; /* Safe padding at bottom */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 80vh;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawerTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.calendarIcon {
+  color: var(--color-accent-gold);
+}
+
+.closeBtn {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:active {
+  transform: scale(0.9);
+}
+
+.drawerSummary {
+  display: flex;
+  gap: 20px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 10px 16px;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.summaryLabel {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.summaryVal {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.incomeVal {
+  color: var(--color-income);
+}
+
+.expenseVal {
+  color: var(--color-text-primary);
+}
+
+.drawerItemsList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 45vh;
+  padding-right: 4px;
+}

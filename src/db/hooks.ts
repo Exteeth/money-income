@@ -10,35 +10,64 @@ export function useCategories(type?: 'income' | 'expense') {
   }, [type]);
 }
 
-export function useTransactions(monthStr?: string) {
+export function useWallets() {
   return useLiveQuery(async () => {
-    let query = db.transactions.orderBy('date');
+    const wallets = await db.wallets.toArray();
+    const results = [];
+    
+    for (const w of wallets) {
+      if (w.id === undefined) continue;
+      
+      // Calculate dynamic balance based on transactions
+      const txs = await db.transactions.where('walletId').equals(w.id).toArray();
+      let balance = 0;
+      for (const tx of txs) {
+        if (tx.type === 'income') {
+          balance += tx.amount;
+        } else {
+          balance -= tx.amount;
+        }
+      }
+      
+      results.push({
+        ...w,
+        balance
+      });
+    }
+    return results;
+  }) || [];
+}
+
+export function useTransactions(monthStr?: string, walletId?: number) {
+  return useLiveQuery(async () => {
+    let txs = [];
     
     if (monthStr) {
-      // monthStr is expected to be 'YYYY-MM'
       const start = `${monthStr}-01`;
-      // Find end date
       const dateParts = monthStr.split('-').map(Number);
       const year = dateParts[0];
       const month = dateParts[1] - 1; // 0-indexed
       const lastDay = new Date(year, month + 1, 0).getDate();
       const end = `${monthStr}-${String(lastDay).padStart(2, '0')}`;
       
-      const results = await db.transactions
+      txs = await db.transactions
         .where('date')
         .between(start, end, true, true)
-        .reverse()
         .toArray();
-      // Dexie between on dates does not sort by date descending if we don't sort manually
-      return results.sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
+    } else {
+      txs = await db.transactions.toArray();
     }
-    
-    const all = await query.reverse().toArray();
-    return all;
-  }, [monthStr]);
+
+    // Filter by walletId if set
+    if (walletId && walletId > 0) {
+      txs = txs.filter(tx => tx.walletId === walletId);
+    }
+
+    return txs.sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
+  }, [monthStr, walletId]);
 }
 
-export function useSummary(monthStr: string) {
+export function useSummary(monthStr: string, walletId?: number) {
   return useLiveQuery(async () => {
     const start = `${monthStr}-01`;
     const dateParts = monthStr.split('-').map(Number);
@@ -47,10 +76,14 @@ export function useSummary(monthStr: string) {
     const lastDay = new Date(year, month + 1, 0).getDate();
     const end = `${monthStr}-${String(lastDay).padStart(2, '0')}`;
 
-    const txs = await db.transactions
+    let txs = await db.transactions
       .where('date')
       .between(start, end, true, true)
       .toArray();
+
+    if (walletId && walletId > 0) {
+      txs = txs.filter(tx => tx.walletId === walletId);
+    }
 
     let income = 0;
     let expense = 0;
@@ -69,10 +102,10 @@ export function useSummary(monthStr: string) {
       balance: income - expense,
       count: txs.length
     };
-  }, [monthStr]) || { income: 0, expense: 0, balance: 0, count: 0 };
+  }, [monthStr, walletId]) || { income: 0, expense: 0, balance: 0, count: 0 };
 }
 
-export function useCategoryStats(monthStr: string) {
+export function useCategoryStats(monthStr: string, walletId?: number) {
   return useLiveQuery(async () => {
     const start = `${monthStr}-01`;
     const dateParts = monthStr.split('-').map(Number);
@@ -81,10 +114,14 @@ export function useCategoryStats(monthStr: string) {
     const lastDay = new Date(year, month + 1, 0).getDate();
     const end = `${monthStr}-${String(lastDay).padStart(2, '0')}`;
 
-    const txs = await db.transactions
+    let txs = await db.transactions
       .where('date')
       .between(start, end, true, true)
       .toArray();
+
+    if (walletId && walletId > 0) {
+      txs = txs.filter(tx => tx.walletId === walletId);
+    }
     
     const categories = await db.categories.toArray();
     const catMap = new Map(categories.map(c => [c.id, c]));
@@ -121,7 +158,7 @@ export function useCategoryStats(monthStr: string) {
 
     // Sort by amount descending
     return result.sort((a, b) => b.amount - a.amount);
-  }, [monthStr]) || [];
+  }, [monthStr, walletId]) || [];
 }
 
 export function useAddTransaction() {

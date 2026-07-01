@@ -7,11 +7,20 @@ export interface Category {
   isDefault?: number; // 1 for default, 0 for custom
 }
 
+export interface Wallet {
+  id?: number;
+  name: string;
+  type: 'cash' | 'bank' | 'credit';
+  balance: number;
+  color: string;
+}
+
 export interface Transaction {
   id?: number;
   type: 'income' | 'expense';
   amount: number;
   categoryId: number;
+  walletId: number; // associated wallet
   note: string;
   date: string; // YYYY-MM-DD
   createdAt: number; // timestamp

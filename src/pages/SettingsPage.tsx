@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { db } from '../db/database';
 import { DEFAULT_CATEGORIES } from '../db/seed';
 import AppShell from '../components/Layout/AppShell';
 import BottomNav from '../components/Layout/BottomNav';
-import { Trash2, Info, Shield, Database } from 'lucide-react';
+import { Trash2, Info, Shield, Database, FileDown } from 'lucide-react';
+import StatementGenerator from '../components/Settings/StatementGenerator';
 import styles from './SettingsPage.module.css';
 
 export const SettingsPage: React.FC = () => {
+  const [showGenerator, setShowGenerator] = useState(false);
+  const [currentMonth] = useState(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    return `${year}-${month}`;
+  });
 
   const handleClearData = async () => {
     if (confirm('คำเตือน! คุณต้องการลบข้อมูลรายรับ-รายจ่ายทั้งหมดในเครื่องใช่หรือไม่? (การดำเนินการนี้ไม่สามารถยกเลิกได้)')) {
@@ -69,6 +77,20 @@ export const SettingsPage: React.FC = () => {
           </div>
         </div>
 
+        {/* Reports section */}
+        <div className={styles.sectionTitle}>รายงานการเงิน</div>
+        <div className={styles.optionsList}>
+          <button onClick={() => setShowGenerator(true)} className={styles.optionRow}>
+            <div className={styles.optionIconWrapper}>
+              <FileDown size={16} />
+            </div>
+            <div className={styles.optionDetails}>
+              <div className={styles.optionTitle}>ออกรายงานสลิปเงินบาท</div>
+              <div className={styles.optionSub}>ดาวน์โหลดใบเสร็จสรุปรายรับ-รายจ่ายรายเดือนสลิปทองคำ</div>
+            </div>
+          </button>
+        </div>
+
         {/* Actions section */}
         <div className={styles.sectionTitle}>การจัดการข้อมูล</div>
         <div className={styles.optionsList}>
@@ -91,6 +113,10 @@ export const SettingsPage: React.FC = () => {
       </div>
 
       <BottomNav />
+
+      {showGenerator && (
+        <StatementGenerator currentMonth={currentMonth} onClose={() => setShowGenerator(false)} />
+      )}
     </AppShell>
   );
 };
