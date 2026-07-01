@@ -1,0 +1,108 @@
+.header {
+  background: rgba(7, 9, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px 20px 12px 20px;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-gold);
+  background: linear-gradient(135deg, #E8D5A3 0%, #C9A55C 50%, #B89045 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 201, 151, 0.08);
+  border: 1px solid rgba(34, 201, 151, 0.15);
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.badge span {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-income);
+  letter-spacing: 0.05em;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-income);
+  box-shadow: 0 0 6px var(--color-income);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+.monthSelector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  height: 44px;
+  padding: 0 6px;
+}
+
+.arrowButton {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arrowButton:hover {
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+}
+
+.arrowButton:active {
+  transform: scale(0.9);
+}
+
+.currentMonthDisplay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.calendarIcon {
+  color: var(--color-accent-gold);
+}

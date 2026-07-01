@@ -1,0 +1,159 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--color-bg-deep);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: rgba(7, 9, 15, 0.9);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: var(--color-text-primary);
+}
+
+.saveBtn {
+  background: none;
+  border: none;
+  color: var(--color-accent-gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.saveBtn:hover {
+  color: var(--color-accent-glow);
+}
+
+.saveBtn:active {
+  transform: scale(0.9);
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 30px;
+}
+
+.typeSelectorContainer {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.typeSelector {
+  display: flex;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 4px;
+  width: 100%;
+  max-width: 240px;
+}
+
+.typeBtn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.activeExpense {
+  background: var(--color-expense);
+  color: white;
+}
+
+.activeIncome {
+  background: var(--color-income);
+  color: var(--color-bg-deep);
+}
+
+.errorBanner {
+  background: rgba(232, 70, 90, 0.1);
+  border: 1px solid rgba(232, 70, 90, 0.2);
+  color: var(--color-expense);
+  padding: 10px 16px;
+  margin: 12px 16px 0 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.inputSection {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.inputIcon {
+  color: var(--color-accent-gold);
+}
+
+.textInput, .dateInput {
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  flex: 1;
+  width: 100%;
+}
+
+.textInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.dateInput {
+  color-scheme: dark; /* Dark mode date picker browser UI */
+}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Dark elegant background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0E1420" />
+      <stop offset="100%" stop-color="#07090F" />
+    </radialGradient>
+    <!-- Gold gradient for coin -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8D5A3" />
+      <stop offset="50%" stop-color="#C9A55C" />
+      <stop offset="100%" stop-color="#B89045" />
+    </linearGradient>
+    <!-- Inner shadow glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" stroke="#1E2A3F" stroke-width="4"/>
+  
+  <!-- Outer Gold Ring -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="url(#goldGrad)" stroke-width="12" filter="url(#glow)"/>
+  
+  <!-- Inner Gold Ring -->
+  <circle cx="256" cy="256" r="130" fill="none" stroke="url(#goldGrad)" stroke-width="3" opacity="0.6"/>
+  
+  <!-- Thai Baht Symbol (฿) in Gold -->
+  <text x="256" y="320" 
+        font-family="'Instrument Sans', 'Noto Sans Thai', sans-serif" 
+        font-size="190" 
+        font-weight="bold" 
+        fill="url(#goldGrad)" 
+        text-anchor="middle"
+        filter="url(#glow)">฿</text>
+</svg>

@@ -1,0 +1,136 @@
+.card {
+  margin: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated metallic shimmer shine overlay */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(251, 211, 141, 0.03) 30%,
+    rgba(251, 211, 141, 0.12) 50%,
+    rgba(251, 211, 141, 0.03) 70%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: metallicShine 8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes metallicShine {
+  0% {
+    left: -150%;
+  }
+  20%, 100% {
+    left: 150%;
+  }
+}
+
+.balanceHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.balanceLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.walletIcon {
+  color: var(--color-accent-gold);
+}
+
+.balanceValue {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.statCol {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.iconContainer {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.incomeIcon {
+  color: var(--color-income);
+  background: rgba(34, 201, 151, 0.08);
+  border: 1px solid rgba(34, 201, 151, 0.15);
+}
+
+.expenseIcon {
+  color: var(--color-expense);
+  background: rgba(232, 70, 90, 0.08);
+  border: 1px solid rgba(232, 70, 90, 0.15);
+}
+
+.statText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.incomeValue {
+  color: var(--color-income);
+}
+
+.expenseValue {
+  color: var(--color-text-primary);
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background-color: var(--color-border);
+  margin: 0 16px;
+}

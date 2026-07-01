@@ -1,0 +1,101 @@
+.itemContainer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.2s ease;
+}
+
+.itemContainer:hover {
+  border-color: var(--color-border-glow);
+}
+
+.itemContent {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--color-bg-card);
+  position: relative;
+  z-index: 2;
+}
+
+.swiped .itemContent {
+  transform: translateX(-56px);
+}
+
+.iconWrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0; /* truncate text container */
+}
+
+.categoryName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.amount {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+  margin-left: 12px;
+}
+
+.income {
+  color: var(--color-income);
+}
+
+.expense {
+  color: var(--color-text-primary);
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 56px;
+  background: var(--color-expense);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:active {
+  background: #c93b4d;
+}
